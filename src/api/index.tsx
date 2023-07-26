@@ -1,12 +1,7 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  gql,
-  createHttpLink,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import config from 'config/index.ts';
+import config from 'configs/index';
 
 const httpLink = createHttpLink({
   uri: config.apiUrl,
@@ -29,16 +24,3 @@ const client = new ApolloClient({
 });
 
 export default client;
-
-client
-  .query({
-    query: gql`
-      query Viewer {
-        viewer {
-          id
-          name
-        }
-      }
-    `,
-  })
-  .then((result) => console.log('result', result));

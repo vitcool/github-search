@@ -22,9 +22,10 @@
     "baseUrl": "./",
     "paths": {
       "api/*": ["./src/api/*"],
-      "config/*": ["./src/config/*"],
+      "configs/*": ["src/configs/*"],
       "components/*": ["./src/components/*"],
-      "hooks/*": ["./src/hooks/*"]
+      "hooks/*": ["./src/hooks/*"],
+      "models/*": ["./src/models/*"],
     }
   },
   "include": ["src"],
