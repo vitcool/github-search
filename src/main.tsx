@@ -6,8 +6,6 @@ import client from 'api/index.tsx';
 
 import App from './App.tsx';
 
-import './index.css';
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ApolloProvider client={client}>

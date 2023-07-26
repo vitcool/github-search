@@ -23,7 +23,7 @@
     "paths": {
       "api/*": ["./src/api/*"],
       "config/*": ["./src/config/*"],
-
+      "components/*": ["./src/components/*"],
       "hooks/*": ["./src/hooks/*"]
     }
   },
