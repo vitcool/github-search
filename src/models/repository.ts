@@ -2,6 +2,11 @@ export interface IOwner {
   login: string;
 }
 
+export interface IPrimaryLanguage {
+  name: string;
+  color: string;
+}
+
 export interface IRepository {
   id: string;
   name: string;
@@ -11,6 +16,7 @@ export interface IRepository {
   forkCount: number;
   isPrivate: boolean;
   owner: IOwner;
+  primaryLanguage: IPrimaryLanguage;
 }
 
 export default IRepository;

@@ -26,7 +26,10 @@ const RepositoryCard = ({ repository }: RepositoryCardProps) => {
     stargazerCount,
     forkCount,
     isPrivate,
+    primaryLanguage,
   } = repository;
+
+  const { color, name: languageName } = primaryLanguage || {};
 
   return (
     <Card
@@ -37,8 +40,13 @@ const RepositoryCard = ({ repository }: RepositoryCardProps) => {
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           @{owner.login}
         </Typography>
+
         <Typography variant="h5" component="div">
           {name}
+        </Typography>
+
+        <Typography sx={{ mb: 1.5 }} color={color}>
+          {languageName}
         </Typography>
 
         <Typography variant="body2">{description}</Typography>
@@ -49,7 +57,7 @@ const RepositoryCard = ({ repository }: RepositoryCardProps) => {
       <CardActions sx={{ display: 'flex', alignItems: 'center' }}>
         <Grid container justifyContent="space-between" direction="row">
           <Grid item>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
               <Grid item>
                 <Badge
                   badgeContent={stargazerCount}
@@ -73,7 +81,7 @@ const RepositoryCard = ({ repository }: RepositoryCardProps) => {
           </Grid>
 
           <Grid item>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
               <Grid item>{isPrivate ? <LockIcon /> : <PublicIcon />}</Grid>
 
               <Grid item>

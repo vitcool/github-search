@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
@@ -6,41 +6,21 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
 
 import { useSearchRepositories } from 'api/hooks';
-
+import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
 import { useDebounce } from 'hooks/index';
 
 import RepositoriesList from 'components/SearchPage/components/RepositoriesList';
-import Observer from 'components/IntersectionObserver';
 
 const INPUT_DEBOUNCE_TIME = 500;
 
 const SearchPage = () => {
   const [value, setValue] = useState<string>('');
   const debouncedValue = useDebounce<string>(value, INPUT_DEBOUNCE_TIME);
-  const { data, isLoading, cursor, isFetched, fetchMore } =
-    useSearchRepositories({
-      query: debouncedValue,
-    });
+  const { data, isLoading, isFetched, requestMore } = useSearchRepositories({
+    query: debouncedValue,
+  });
 
-  const requestMore = useCallback(() => {
-    console.log('cursor', cursor);
-    fetchMore({
-      variables: {
-        after: cursor,
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) => {
-        const newEntries = fetchMoreResult?.search?.nodes || [];
-        console.log(fetchMoreResult?.search);
-        return {
-          search: {
-            edges: fetchMoreResult.search.edges,
-            repositoryCount: fetchMoreResult.search.repositoryCount,
-            nodes: [...previousResult.search.nodes, ...newEntries],
-          },
-        };
-      },
-    });
-  }, [cursor, fetchMore]);
+  useInfiniteScroll({ fetchData: requestMore, isLoading });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -57,7 +37,7 @@ const SearchPage = () => {
         <Grid item sx={{ width: '100%' }}>
           <TextField
             id="outlined-basic"
-            label="Enter the name of repository"
+            label="Name of repository"
             variant="outlined"
             onChange={handleChange}
             sx={{ width: '100%' }}
@@ -65,18 +45,20 @@ const SearchPage = () => {
           />
         </Grid>
         <Grid item xs={12} sx={{ paddingTop: 2 }}>
-          {isLoading ? (
-            <Grid container justifyContent="center">
+          <RepositoriesList
+            repositories={data}
+            isFetched={isFetched}
+            isLoading={isLoading}
+          />
+          {isLoading && (
+            <Grid container justifyContent="center" sx={{ marginTop: 2 }}>
               <Grid item>
                 <CircularProgress />
               </Grid>
             </Grid>
-          ) : (
-            <RepositoriesList repositories={data} isFetched={isFetched} />
           )}
         </Grid>
       </Grid>
-      <Observer fetchData={requestMore} />
     </Container>
   );
 };
