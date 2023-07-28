@@ -81,9 +81,19 @@ const RepositoryCard = ({
           @{owner.login}
         </Typography>
 
-        <Typography variant="h5" component="div">
-          {name}
-        </Typography>
+        <Tooltip title={name}>
+          <Typography
+            variant="h5"
+            sx={{
+              wordBreak: 'break',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              width: '100%',
+            }}
+          >
+            {name}
+          </Typography>
+        </Tooltip>
 
         <Typography sx={{ mb: 1.5 }} color={color}>
           {languageName}
@@ -148,7 +158,11 @@ const RepositoryCard = ({
           <Grid item>
             <Grid container justifyContent="space-between">
               <Grid item>
-                <Tooltip title="Add to favourites">
+                <Tooltip
+                  title={`${
+                    isInFavourites ? 'Remove from ' : 'Add to'
+                  }  favourites`}
+                >
                   <IconButton
                     size="small"
                     onClick={handleToggleFavouritesClick}
@@ -157,16 +171,6 @@ const RepositoryCard = ({
                   </IconButton>
                 </Tooltip>
               </Grid>
-
-              {withRating && (
-                <Grid item>
-                  <Rating
-                    name="simple-controlled"
-                    value={rating}
-                    onChange={handleRatingChange}
-                  />
-                </Grid>
-              )}
 
               <Grid item>
                 <Link href={url} target="_blank" rel="noopener">
@@ -179,6 +183,19 @@ const RepositoryCard = ({
               </Grid>
             </Grid>
           </Grid>
+          {withRating && (
+            <Grid item>
+              <Grid container justifyContent="center">
+                <Grid item>
+                  <Rating
+                    name="simple-controlled"
+                    value={rating}
+                    onChange={handleRatingChange}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
         </Grid>
       </CardActions>
     </Card>
