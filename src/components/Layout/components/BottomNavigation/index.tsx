@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Paper from '@mui/material/Paper';
-import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationMaterial from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchIcon from '@mui/icons-material/Search';
@@ -11,13 +11,19 @@ import { Routes } from 'constants/common';
 
 const NAVIGATION = [Routes.HOME, Routes.FAVOURITES];
 
-const SimpleBottomNavigation = () => {
+const BottomNavigation = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const [value, setValue] = React.useState<number>(
+    NAVIGATION.indexOf(pathname as Routes)
+  );
 
   const handleNavigationChange = (
     _: React.SyntheticEvent<Element, Event>,
     newValue: number
   ) => {
+    setValue(newValue);
     navigate(NAVIGATION[newValue]);
   };
 
@@ -26,17 +32,17 @@ const SimpleBottomNavigation = () => {
       sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1111 }}
       elevation={3}
     >
-      <BottomNavigation showLabels onChange={handleNavigationChange}>
-        <BottomNavigationAction
-          label="Search"
-          icon={<SearchIcon />}
-          sx={{ width: 500 }}
-        />
+      <BottomNavigationMaterial
+        showLabels
+        onChange={handleNavigationChange}
+        value={value}
+      >
+        <BottomNavigationAction label="Search" icon={<SearchIcon />} />
 
         <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-      </BottomNavigation>
+      </BottomNavigationMaterial>
     </Paper>
   );
 };
 
-export default SimpleBottomNavigation;
+export default BottomNavigation;

@@ -13,6 +13,7 @@ export default defineConfig({
       models: '/src/models',
       constants: '/src/constants',
       pages: '/src/pages',
+      context: '/src/context',
     },
   },
 });

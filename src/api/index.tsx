@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 import config from 'configs/index';
-import IRepository from 'models/repository';
+import { IRepository } from 'models/repository';
 
 const httpLink = createHttpLink({
   uri: config.apiUrl,

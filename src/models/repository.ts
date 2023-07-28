@@ -7,6 +7,10 @@ export interface IPrimaryLanguage {
   color: string;
 }
 
+export interface IList {
+  totalCount: number;
+}
+
 export interface IRepository {
   id: string;
   name: string;
@@ -14,9 +18,13 @@ export interface IRepository {
   url: string;
   stargazerCount: number;
   forkCount: number;
-  isPrivate: boolean;
+  watchers: IList;
+  discussions: IList;
+  assignableUsers: IList;
   owner: IOwner;
   primaryLanguage: IPrimaryLanguage;
 }
 
-export default IRepository;
+export interface IRepositoryWithRating extends IRepository {
+  rating: number;
+}

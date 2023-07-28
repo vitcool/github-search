@@ -5,24 +5,26 @@ type UseInfiniteScrollProps = {
   isLoading: boolean;
 };
 
+const THRESHOLD = 100;
+
 const useInfiniteScroll = ({
   fetchData,
   isLoading,
 }: UseInfiniteScrollProps) => {
   useEffect(() => {
     const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop !==
-          document.documentElement.offsetHeight ||
-        isLoading
-      ) {
-        return;
+      const isScrolledToBottom =
+        document.documentElement.scrollHeight -
+          (document.documentElement.scrollTop + window.innerHeight) <=
+        THRESHOLD;
+
+      if (isScrolledToBottom && !isLoading) {
+        fetchData();
       }
-      fetchData();
     };
 
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, [fetchData, isLoading]);
 };
