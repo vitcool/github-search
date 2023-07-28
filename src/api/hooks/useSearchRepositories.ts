@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-
 import { gql, useQuery } from '@apollo/client';
 
 import { IRepository } from 'models/repository';
@@ -64,67 +63,6 @@ export type UseSearchRepositoriesReturn = {
 
 const REPOSITORY_TYPE = 'REPOSITORY';
 const FIRST_COUNT = 30;
-
-// const MOCK = [
-//   {
-//     cursor: '1',
-//     node: {
-//       id: '1',
-//       name: 'Fdeddy',
-//       description:
-//         'Long story shooort.Long story shooort.Long story shooort.Long story shooort.Long story shooort.Long story shooort...',
-//       url: 'string',
-//       stargazerCount: 123,
-//       forkCount: 123,
-//       isPrivate: false,
-//       owner: {
-//         login: 'Madness',
-//       },
-//       primaryLanguage: {
-//         name: 'F#',
-//         color: 'yellow',
-//       },
-//     },
-//   },
-//   {
-//     cursor: '2',
-//     node: {
-//       id: '2',
-//       name: 'Freddy',
-//       description: 'Long story loong...',
-//       url: 'string',
-//       stargazerCount: 23,
-//       forkCount: 3,
-//       isPrivate: false,
-//       owner: {
-//         login: 'Derk',
-//       },
-//       primaryLanguage: {
-//         name: 'C#',
-//         color: 'red',
-//       },
-//     },
-//   },
-//   {
-//     cursor: '2',
-//     node: {
-//       id: '3',
-//       name: 'Seddy',
-//       description: 'Long story...',
-//       url: 'string',
-//       stargazerCount: 56,
-//       forkCount: 71,
-//       isPrivate: true,
-//       owner: {
-//         login: 'Bull',
-//       },
-//       primaryLanguage: {
-//         name: 'JS',
-//         color: 'green',
-//       },
-//     },
-//   },
-// ];
 
 const useSearchRepositories = ({ query }: UseSearchRepositoriesProps) => {
   const skip = !(query.length >= MIN_QUERY_LENGTH);

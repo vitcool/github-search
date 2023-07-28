@@ -2,10 +2,11 @@ import { useCallback } from 'react';
 
 import { Grid } from '@mui/material';
 
+import { useFavouriteRepositories } from 'hooks/useFavouriteRepositories';
+
 import { IRepository } from 'models/repository';
 
 import RepositoryCard from 'components/common/RepositoryCard';
-import { useFavouriteRepositories } from 'hooks/useFavouriteRepositories';
 
 type RepositoriesListProps = {
   repositories: IRepository[];
@@ -27,6 +28,7 @@ const RepositoriesList = ({
     (repository: IRepository) => {
       const { id } = repository;
       const isInFavourites = checkIsInFavourites(id);
+
       if (isInFavourites) {
         removeFromFavourites(id);
       } else {

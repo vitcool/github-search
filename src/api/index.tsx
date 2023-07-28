@@ -38,7 +38,6 @@ const client = new ApolloClient({
       Query: {
         fields: {
           search: {
-            // Custom merge function for the search field
             merge(
               existing: SearchResultItemConnection,
               incoming: SearchResultItemConnection
@@ -46,7 +45,6 @@ const client = new ApolloClient({
               const { edges: existingEdges = [] } = existing || {};
               const { edges: incomingEdges = [] } = incoming;
 
-              // Merge and deduplicate edges based on their cursors
               const mergedEdges = [...existingEdges, ...incomingEdges].reduce(
                 (acc, edge) => {
                   if (!acc.find((item) => item.cursor === edge.cursor)) {

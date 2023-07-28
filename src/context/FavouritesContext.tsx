@@ -45,13 +45,13 @@ export const FavouritesContextProvider = ({
     repositoryId: string,
     rating: number | null
   ): void => {
-    const itemIndex = favourites.findIndex(
-      (favouriteItem) => favouriteItem.id === repositoryId
+    setFavourites((prevFavourites) =>
+      prevFavourites.map((favouriteItem) =>
+        favouriteItem.id === repositoryId
+          ? { ...favouriteItem, rating: rating || 0 }
+          : favouriteItem
+      )
     );
-    const updatedRepository = { ...favourites[itemIndex], rating: rating || 0 };
-    const updatedRepositories = [...favourites];
-    updatedRepositories.splice(itemIndex, 1, updatedRepository);
-    setFavourites(updatedRepositories);
   };
 
   return (

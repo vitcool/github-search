@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import IconButton from '@mui/material/IconButton';
 import Rating from '@mui/material/Rating';
+import Tooltip from '@mui/material/Tooltip';
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -105,53 +106,63 @@ const RepositoryCard = ({
           <Grid item>
             <Grid container spacing={4}>
               <Grid item>
-                <Badge
-                  badgeContent={watchers.totalCount}
-                  max={MAX_COUNT_TO_SHOW}
-                  color="primary"
-                >
-                  <VisibilityIcon color="action" />
-                </Badge>
+                <Tooltip title="Number of stars">
+                  <Badge
+                    badgeContent={stargazerCount}
+                    max={MAX_COUNT_TO_SHOW}
+                    color="primary"
+                  >
+                    <StarIcon color="action" />
+                  </Badge>
+                </Tooltip>
               </Grid>
 
               <Grid item>
-                <Badge
-                  badgeContent={stargazerCount}
-                  max={MAX_COUNT_TO_SHOW}
-                  color="primary"
-                >
-                  <StarIcon color="action" />
-                </Badge>
+                <Tooltip title="Number of forks">
+                  <Badge
+                    badgeContent={forkCount}
+                    max={MAX_COUNT_TO_SHOW}
+                    color="primary"
+                  >
+                    <ForkRightIcon color="action" />
+                  </Badge>
+                </Tooltip>
               </Grid>
 
               <Grid item>
-                <Badge
-                  badgeContent={forkCount}
-                  max={MAX_COUNT_TO_SHOW}
-                  color="primary"
-                >
-                  <ForkRightIcon color="action" />
-                </Badge>
+                <Tooltip title="Number of watchers">
+                  <Badge
+                    badgeContent={watchers.totalCount}
+                    max={MAX_COUNT_TO_SHOW}
+                    color="primary"
+                  >
+                    <VisibilityIcon color="action" />
+                  </Badge>
+                </Tooltip>
               </Grid>
 
               <Grid item>
-                <Badge
-                  badgeContent={discussions.totalCount}
-                  max={MAX_COUNT_TO_SHOW}
-                  color="primary"
-                >
-                  <ChatIcon color="action" />
-                </Badge>
+                <Tooltip title="Number of assignable users">
+                  <Badge
+                    badgeContent={assignableUsers.totalCount}
+                    max={MAX_COUNT_TO_SHOW}
+                    color="primary"
+                  >
+                    <SupervisedUserCircleIcon color="action" />
+                  </Badge>
+                </Tooltip>
               </Grid>
 
               <Grid item>
-                <Badge
-                  badgeContent={assignableUsers.totalCount}
-                  max={MAX_COUNT_TO_SHOW}
-                  color="primary"
-                >
-                  <SupervisedUserCircleIcon color="action" />
-                </Badge>
+                <Tooltip title="Number of discussions">
+                  <Badge
+                    badgeContent={discussions.totalCount}
+                    max={MAX_COUNT_TO_SHOW}
+                    color="primary"
+                  >
+                    <ChatIcon color="action" />
+                  </Badge>
+                </Tooltip>
               </Grid>
             </Grid>
           </Grid>
@@ -165,10 +176,16 @@ const RepositoryCard = ({
           <Grid item>
             <Grid container justifyContent="space-between">
               <Grid item>
-                <IconButton size="small" onClick={handleToggleFavouritesClick}>
-                  {isInFavourites ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                </IconButton>
+                <Tooltip title="Add to favourites">
+                  <IconButton
+                    size="small"
+                    onClick={handleToggleFavouritesClick}
+                  >
+                    {isInFavourites ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                  </IconButton>
+                </Tooltip>
               </Grid>
+
               {withRating && (
                 <Grid item>
                   <Rating
@@ -178,11 +195,14 @@ const RepositoryCard = ({
                   />
                 </Grid>
               )}
+
               <Grid item>
                 <Link href={url} target="_blank" rel="noopener">
-                  <IconButton size="small">
-                    <LinkIcon />
-                  </IconButton>
+                  <Tooltip title="Open in new tab">
+                    <IconButton size="small">
+                      <LinkIcon />
+                    </IconButton>
+                  </Tooltip>
                 </Link>
               </Grid>
             </Grid>
