@@ -18,8 +18,6 @@ import ForkRightIcon from '@mui/icons-material/ForkRight';
 import StarIcon from '@mui/icons-material/Star';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import LinkIcon from '@mui/icons-material/Link';
-import ChatIcon from '@mui/icons-material/Chat';
-import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 
 import { IRepositoryWithRating, IRepository } from 'models/repository';
 
@@ -49,8 +47,6 @@ const RepositoryCard = ({
     stargazerCount,
     forkCount,
     watchers,
-    discussions,
-    assignableUsers,
     primaryLanguage,
   } = repository;
 
@@ -137,30 +133,6 @@ const RepositoryCard = ({
                     color="primary"
                   >
                     <VisibilityIcon color="action" />
-                  </Badge>
-                </Tooltip>
-              </Grid>
-
-              <Grid item>
-                <Tooltip title="Number of assignable users">
-                  <Badge
-                    badgeContent={assignableUsers.totalCount}
-                    max={MAX_COUNT_TO_SHOW}
-                    color="primary"
-                  >
-                    <SupervisedUserCircleIcon color="action" />
-                  </Badge>
-                </Tooltip>
-              </Grid>
-
-              <Grid item>
-                <Tooltip title="Number of discussions">
-                  <Badge
-                    badgeContent={discussions.totalCount}
-                    max={MAX_COUNT_TO_SHOW}
-                    color="primary"
-                  >
-                    <ChatIcon color="action" />
                   </Badge>
                 </Tooltip>
               </Grid>

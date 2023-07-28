@@ -7,7 +7,7 @@ export interface IPrimaryLanguage {
   color: string;
 }
 
-export interface IList {
+export interface IWatchersList {
   totalCount: number;
 }
 
@@ -18,9 +18,7 @@ export interface IRepository {
   url: string;
   stargazerCount: number;
   forkCount: number;
-  watchers: IList;
-  discussions: IList;
-  assignableUsers: IList;
+  watchers: IWatchersList;
   owner: IOwner;
   primaryLanguage: IPrimaryLanguage;
 }
