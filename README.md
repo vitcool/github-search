@@ -16,7 +16,6 @@ Please make sure to create a `.env` file in the project root and copy the conten
 This project uses the following dependencies:
 
 - `@apollo/client`: A powerful GraphQL client library for React applications. It's used to interact with the GitHub GraphQL API and fetch data.
-- `@emotion/react` and `@emotion/styled`: Emotion is a popular CSS-in-JS library. It's used for styling components in this project.
 - `@mui/icons-material` and `@mui/material`: Material-UI is a popular React UI framework. It provides a set of ready-to-use components and icons to build modern user interfaces.
 - `graphql`: The official JavaScript library for working with GraphQL. It's used to define and execute GraphQL queries in this project.
 - `react` and `react-dom`: The core libraries for building React applications.
