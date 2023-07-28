@@ -27,12 +27,6 @@ const SEARCH_REPOSITORY = gql`
             watchers {
               totalCount
             }
-            discussions {
-              totalCount
-            }
-            assignableUsers {
-              totalCount
-            }
             owner {
               login
             }
