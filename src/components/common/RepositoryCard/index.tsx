@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent, memo } from 'react';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -202,4 +202,6 @@ const RepositoryCard = ({
   );
 };
 
-export default RepositoryCard;
+const MemoizedRepositoryCard = memo(RepositoryCard);
+
+export default MemoizedRepositoryCard;
